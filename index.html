@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <button id="b">Send: Hello World!</button>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:9999');
+
+        const button = document.getElementById('b')
+        button.addEventListener('click', () => {
+            socket.emit('send', 'Hello, World!)')
+        });
+        socket.on('SERVER:NEW_MESSAGE', (messageObj) => {
+            if (messageObj.user !== window.user){
+                console.log(messageObj)
+            }
+        })
+
+    </script>
+</body>
+</html>
